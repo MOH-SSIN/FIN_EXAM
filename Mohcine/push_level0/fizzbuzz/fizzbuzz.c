@@ -30,8 +30,8 @@ int main()
             write(1, "buzz", 4);
         else
             ft_putnbr(i);
-        i++;
         write(1, "\n", 1);
+        i++;
     }
     return (0);
 }
