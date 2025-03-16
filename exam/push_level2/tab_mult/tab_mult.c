@@ -56,7 +56,8 @@ int main(int argc, char **argv)
     if (argc == 2)
     {
         int nbr = ft_atoi(argv[1]);
-        if (nbr > 0)
+        // darori ndkhle 0;
+        if (nbr >= 0)
             tab_mult(nbr);
     }
     else

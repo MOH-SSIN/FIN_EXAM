@@ -1,7 +1,28 @@
-// Passed Moulinette 2019.09.01
-
 #include <stdlib.h>
-// #include "ft_list.h"
+#include <stdio.h>
+#include <string.h>
+#include "list.h"
+
+int cmp_str(void *a, void *b)
+{
+    return (strcmp((char *)a, (char *)b));
+}
+
+t_list *create_node(void *data)
+{
+    t_list *new_node;
+    new_node = malloc(sizeof(t_list));
+    if(!new_node)
+        return(NULL);
+    new_node->data = data;
+    new_node->next = NULL;
+    return(new_node);
+}
+
+void print_data(void *data)
+{
+    printf("%s\n", (char *)data);
+}
 
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
@@ -16,54 +37,26 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 		free(cur);
 		ft_list_remove_if(begin_list, data_ref, cmp);
 	}
-	cur = *begin_list;
-	ft_list_remove_if(&cur->next, data_ref, cmp);
+	else
+	{
+		cur = *begin_list;
+		ft_list_remove_if(&cur->next, data_ref, cmp);
+	}
 }
 
-//---------------------------------------------------------------------
-// #include <stdio.h>
-// #include <string.h>
+int main()
+{
+    t_list *list;
 
-// void	print_list(t_list **begin_list)
-// {
-// 	t_list *cur = *begin_list;
-// 	while (cur != 0)
-// 	{
-// 		printf("%s\n", cur->data);
-// 		cur = cur->next;
-// 	}
-// }
+    list = create_node("ikram");
+    list->next = create_node("dahhan");
+    list->next->next = create_node("mohcine");
 
-// int		main(void)
-// {
-// 	char straa[] = "String aa";
-// 	t_list *aa = malloc(sizeof(t_list));
-// 	aa->next = 0;
-// 	aa->data = straa;
+    ft_list_remove_if(&list, "ikram", cmp_str);
 
-// 	char strbb[] = "String bb";
-// 	t_list *bb = malloc(sizeof(t_list));
-// 	bb->next = 0;
-// 	bb->data = strbb;
-
-// 	char strcc[] = "String cc";
-// 	t_list *cc = malloc(sizeof(t_list));
-// 	cc->next = 0;
-// 	cc->data = strcc;
-
-// 	char strdd[] = "String dd";
-// 	t_list *dd = malloc(sizeof(t_list));
-// 	dd->next = 0;
-// 	dd->data = strdd;
-
-// 	aa->next = bb;
-// 	bb->next = cc;
-// 	cc->next = dd;
-
-// 	t_list **begin_list = &aa;
-
-// 	print_list(begin_list);
-// 	printf("----------\n");
-// 	ft_list_remove_if(begin_list, straa, strcmp);
-// 	print_list(begin_list);
-// }
+    while (list)
+    {
+        print_data(list->data);
+        list = list->next;
+    } 
+}

@@ -48,9 +48,9 @@ char	*ft_itoa(int nb)
 	return (result);
 }
 
-int	main(void)
-{
-	char *nbr;
-	nbr = ft_itoa(-2147483648);
-	printf("%s", nbr);
-}
+// int	main(void)
+// {
+// 	char *nbr;
+// 	nbr = ft_itoa(-2147483648);
+// 	printf("%s", nbr);
+// }

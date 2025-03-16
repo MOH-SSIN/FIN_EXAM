@@ -1,67 +1,50 @@
-// Passed Moulinette 2019.09.02
-
+#include "list.h"
 #include <stdlib.h>
-typedef struct    s_list
-{
-    struct s_list *next;
-    void          *data;
-}                 t_list;
+#include <stdio.h>
 
-void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
+void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
 {
-	if (begin_list == 0)
-		return;
-	while (begin_list != 0)
-	{
-		f(begin_list->data);
-		begin_list = begin_list->next;
-	}
+    while (begin_list)
+    {
+        f(begin_list->data);
+        begin_list = begin_list->next;
+    }
 }
 
-//--------------------------------------------------------
-// #include <stdio.h>
+void print_data(void *data)
+{
+    printf("%s\n", (char *)data);
+}
 
-// void	int_doubler(void *n)
-// {
-// 	int *num = (int *)n;
-// 	*num = *num * 2;
-// }
+t_list *create_node(void *data)
+{
+    t_list *new_node;
+    new_node = malloc(sizeof(t_list));
+    if (!new_node)
+        return(NULL);
+    new_node->data = data;
+    new_node->next = NULL;
+    return(new_node);
+}
 
-// int		main(void)
-// {
-// 	t_list *pt_a = malloc(sizeof(t_list));
-// 	int	n_a = 0;
-// 	pt_a->data = &n_a;
-// 	pt_a->next = 0;
+int main(void)
+{
+    t_list *list;
 
-// 	t_list *pt_b = malloc(sizeof(t_list));
-// 	int	n_b = 3;
-// 	pt_b->data = &n_b;
-// 	pt_b->next = 0;
+    list = create_node("First");
+    list->next = create_node("Second");
+    list->next->next = create_node("Third");
 
-// 	t_list *pt_c = malloc(sizeof(t_list));
-// 	int	n_c = 4;
-// 	pt_c->data = &n_c;
-// 	pt_c->next = 0;
+    ft_list_foreach(list, &print_data);
 
-// 	pt_a->next = pt_b;
-// 	pt_b->next = pt_c;
+    // // Libération de la mémoire
+    // t_list *tmp;
+    // while (list)
+    // {
+    //     tmp = list->next;
+    //     free(list);
+    //     list = tmp;
+    // }
 
-// 	t_list *cur = pt_a;
-// 	while (cur != 0)
-// 	{
-// 		printf("%d, ", *(int *)(cur->data));
-// 		cur = cur->next;
-// 	}
-// 	printf("\n");
-
-// 	ft_list_foreach(pt_a, int_doubler);
-
-// 	cur = pt_a;
-// 	while (cur != 0)
-// 	{
-// 		printf("%d, ", *(int *)(cur->data));
-// 		cur = cur->next;
-// 	}
-// 	printf("\n");
-// }
+    return (0);
+}

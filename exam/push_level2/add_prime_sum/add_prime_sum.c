@@ -1,71 +1,74 @@
-#include "unistd.h"
-#include "stdlib.h"
+#include <unistd.h>
 
-int ft_atoi(char *str)
+void	ft_putchar(int c)
 {
-    int i = 0;
-    int result = 0;
-    int sign = 1;
-    while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-        i++;
-    if (str[i] == '-')
-    {
-        sign *=  -1;
-        i++;
-    }
-    else if (str[i] == '+')
-        i++;
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        result = result * 10 + (str[i] - '0');
-        i++;
-    }
-    return (result * sign);
+	write(1, &c, 1);
 }
 
-int is_prime(int nbr)
+int	ft_atoi(char *nbr)
 {
-    int i = 2;
-    while (i <= nbr /2)
-    {
-        if (i % 2 == 0)
-            return (0);
-        i++;
-    }
-    return (1);
+	int	i;
+	int	res;
+
+	i = 0;
+	res = 0;
+	while (nbr[i])
+	{
+		res *= 10;
+		res += nbr[i] - '0';
+		i++;
+	}
+	return (res);
 }
 
-void ft_putnbr(int nbr)
+void	ft_putnbr(int nb)
 {
-    char c;
-    if (nbr >= 10)
-    {
-        ft_putnbr( nbr / 10);
-        ft_putnbr( nbr % 10); 
-    }
-    c = nbr + '0';
-    write(1,&c,1);
+	if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	else if (nb <= 9)
+		ft_putchar(nb + '0');
 }
 
-
-int main(int argc, char **argv)
+int	ft_is_prime(int nb)
 {
-    int nbr;
-    if (argc == 2)
-    {
-        int som = 0;
-        int i = 2;
-        nbr = ft_atoi(argv[1]);
-        while (i <= nbr)
-        {
-            if (is_prime(nbr))
-                som += i;
-            i++;
-        }
-        ft_putnbr(nbr);
-    }
-    else
-        write(1,"0",1);
-    write(1,"\n",1);
-    return (0);
+	int	i;
+
+	i = 2;
+	while (i < nb)
+	{
+		if (nb % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_add_sum_prime(int nb)
+{
+	int	i;
+	int	prime_sum;
+
+	i = 2;
+	prime_sum = 0;
+	if (nb <= 0)
+		return (0);
+	while (i <= nb)
+	{
+		if (ft_is_prime(i))
+			prime_sum += i;
+		i++;
+	}
+	return (prime_sum);
+}
+
+int	main(int ac, char **av)
+{
+	if (ac == 2)
+		ft_putnbr(ft_add_sum_prime(ft_atoi(av[1])));
+	else
+		write(1, "0", 1);
+	write(1, "\n", 1);
 }

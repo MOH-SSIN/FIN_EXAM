@@ -64,19 +64,19 @@ t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 //     lst = tmp;
 //     return(lst);
 // }
-int main()
-{
-    t_list *list;
+// int main()
+// {
+//     t_list *list;
 
-    list = create_node(5);
-    list->next = create_node(4);
-    list->next->next = create_node(1);
+//     list = create_node(5);
+//     list->next = create_node(4);
+//     list->next->next = create_node(1);
 
-    list = sort_list(list, ascending);
+//     list = sort_list(list, ascending);
 
-    while (list)
-    {
-        print_data(list->data);
-        list = list->next;
-    } 
-}
+//     while (list)
+//     {
+//         print_data(list->data);
+//         list = list->next;
+//     } 
+// }

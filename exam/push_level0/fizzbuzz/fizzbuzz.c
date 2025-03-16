@@ -1,35 +1,37 @@
-#include "unistd.h"
+#include <unistd.h>
 
-
-int main(void)
+void ft_putchar (int c)
 {
-    int div;
-    int rest;
-    int i;
-    div = 0;
-    rest = 0;
-    i = 0;
-    while(++i <= 100)
-    {
-        if (i % 3 == 0)
-            write(1,"fizz",4);
-        else if (i % 5 == 0)
-            write(1,"buzz",4);
-        else if (i % 3 == 0)
-            write(1,"fizzbuzz",8);
-        else if (i > 10)
-        {
-            div = i / 10 + '0';
-            rest = i % 10 + '0';
-            write(1,&div,1);
-            write(1,&rest,1);
-        }
-        else
-        {
-            rest = i + '0';
-            write(1,&rest,1);
-        }
-        write (1,"\n",1);
-    }
+    write(1, &c, 1);
+}
 
+void ft_putnbr(int n)
+{
+    if (n > 9)
+    {
+        ft_putnbr(n / 10);
+        ft_putnbr(n % 10);
+    }   
+    else if (n <= 9)
+        ft_putchar(n + 48);
+}
+
+int main()
+{
+    int i = 1;
+
+    while (i <= 100)
+    {
+        if (i % 3 == 0 && i % 5 == 0)
+            write(1, "fizzbuzz", 8);
+        else if (i % 3 == 0)
+            write(1, "fizz", 4);
+        else if (i % 5 == 0)
+            write(1, "buzz", 4);
+        else
+            ft_putnbr(i);
+        i++;
+        write(1, "\n", 1);
+    }
+    return (0);
 }

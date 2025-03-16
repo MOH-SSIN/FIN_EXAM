@@ -26,10 +26,10 @@ size_t	ft_strcspn(const char *s, const char *reject)
     return (i);
 }
 
-int	main(void)
-{
-	printf("%lu\n", ft_strcspn("tfesf", "es"));
-	printf("%lu\n", strcspn("tfestf", "es"));
-    printf("%lu\n", ft_strcspn("test", "f"));
-	printf("%lu\n", strcspn("test", "f"));
-}
+// int	main(void)
+// {
+// 	printf("%lu\n", ft_strcspn("tfesf", "es"));
+// 	printf("%lu\n", strcspn("tfestf", "es"));
+//     printf("%lu\n", ft_strcspn("test", "f"));
+// 	printf("%lu\n", strcspn("test", "f"));
+// }
